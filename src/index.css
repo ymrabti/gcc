@@ -7,7 +7,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.reponame {
+    color: pink;
+font-size: 2vw;
+}.repodesc {
+color: darkgrey;
+font-size: 1.5vw
 }
+.repouser{color: darkgrey;font-size: 1.5vw;padding: 10px;}
+.boxed{border: 2px black solid;border-radius: 5px;padding: 3px;}
+.reponame,.repodesc,.repouser{
+    padding: 10px 10px 10px 40px;
+}
+.itemRepo{max-width: 800px;padding: 15px;border-radius: 15px;border: 2px red solid;margin: 20px;display: inline-flex;}
+.imageUser{border-radius: 20px;width: 100%}
+.left{width: 25%}
+.right{width: 75%}
