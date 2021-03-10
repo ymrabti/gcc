@@ -1,26 +1,48 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 .reponame {
-    color: pink;
-font-size: 2vw;
-}.repodesc {
-color: darkgrey;
-font-size: 1.5vw
+  color: rgb(121, 7, 26);
+  font-size: 2.7vw;
 }
-.repouser{color: darkgrey;font-size: 1.5vw;padding: 10px;}
-.boxed{border: 2px black solid;border-radius: 5px;padding: 3px;}
-.reponame,.repodesc,.repouser{
-    padding: 10px 10px 10px 40px;
+.repodesc , .repouser{
+  color: rgb(78, 78, 78);
+  font-size: 2vw;
 }
-.itemRepo{max-width: 800px;padding: 15px;border-radius: 15px;border: 2px red solid;margin: 20px;display: inline-flex;}
-.imageUser{border-radius: 20px;width: 100%}
-.left{width: 25%}
-.right{width: 75%}
+.repouser {
+  padding: 4px;
+}
+.boxed {
+  border: 2px black solid;
+  border-radius: 5px;
+  padding: 5px;margin-right: 5px;
+}
+.reponame,
+.repodesc,
+.repouser {
+  padding: 5px 8px 8px 40px;
+}
+.itemRepo {
+  max-width: 800px;
+  padding: 15px;
+  border-radius: 15px;
+  border: 2px rgb(255, 187, 0) solid;
+  margin: 20px;
+  display: inline-flex;
+}
+.imageUser {
+  border-radius: 20px;
+  width: 100%;
+}
+.left {
+  width: 15%;
+}
+.right {
+  width: 85%;
+}
