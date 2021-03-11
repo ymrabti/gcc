@@ -9,11 +9,11 @@ body {
 
 .reponame {
   color: rgb(121, 7, 26);
-  font-size: 1.5vw;
+  font-size: 1.3em;
 }
 .repodesc , .repouser{
   color: rgb(78, 78, 78);
-  font-size: 1vw;
+  font-size: 1em;
 }
 .repouser {
   padding: 4px;
@@ -41,7 +41,7 @@ body {
   width: 100%;
 }
 .left {
-  width: 15%;
+  width: 150px;
 }
 .right {
   width: 85%;
