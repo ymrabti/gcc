@@ -15,27 +15,40 @@ class RepositoriesItem extends React.Component {
         this.item = props.dataitem
     }
     render() {
-        var itemRender = <div className="itemRepo" >
-            <div className="left">
-                <img src={this.item["owner"]["avatar_url"]} className="imageUser" alt={`${this.item["owner"]["login"]}'Avatar`} />
+        const repoName = this.item["name"];
+        const userName = this.item["owner"]["login"];
+        const avatarUrl = this.item["owner"]["avatar_url"];
+        const repoDesc = this.item["description"];
+        const starCount = this.item["stargazers_count"];
+        const issuesCount = this.item["open_issues_count"];
+        const github = "https://github.com/";
+        const daysAgo = Math.ceil((timestamp - new Date(this.item["pushed_at"]).getTime()) / (1000 * 3600 * 24));
+        return <div className="itemRepo" >
+        <div className="left">
+            <a href={avatarUrl} rel="noreferrer" target="_blank">
+                <img src={avatarUrl} className="imageUser" alt={`${userName}'Avatar`} />
+            </a>
+        </div>
+        <div className="right">
+            <div className="reponame">
+                <a href={github+userName+"/"+repoName} rel="noreferrer" target="_blank">
+                    {repoName}
+                </a>
             </div>
-            <div className="right">
-                <div className="reponame">{this.item["name"]}</div>
-                <div className="repodesc">{this.item["description"]}</div>
-                <div className="repouser">
-                    <span className="boxed">Stars : {this.item["stargazers_count"]}</span>
-                    <span className="boxed">Issues : {this.item["open_issues_count"]}</span>
-            submitted {Math.ceil((timestamp - new Date(this.item["pushed_at"]).getTime()) / (1000 * 3600 * 24))}
-            days ago by {this.item["owner"]["login"]}
-                </div>
+            <div className="repodesc">{repoDesc}</div>
+            <div className="repouser">
+                <span className="boxed">Stars : {starCount}</span>
+                <span className="boxed">Issues : {issuesCount}</span>
+                    submitted {daysAgo}
+                    days ago by <a href={github+userName} rel="noreferrer" target="_blank">{userName}</a>
             </div>
-        </div>;
-        return itemRender;
+        </div>
+    </div>;
     }
 }
 class RepositoriesList extends React.Component {
     state = {};
-    controlPoint = {scrollProgress:Number,page:Number};
+    controlPoint = 0;
     pageShouldLoaded = 1;
     constructor() {
         super();
@@ -53,31 +66,14 @@ class RepositoriesList extends React.Component {
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll.bind(this));
     }
-    handleScroll(event) {
+    handleScroll(_event) {
         if (!this.state.isLoading) {
-            //let root = event.srcElement.querySelector("#root");
-            //let offsetHeight = root.offsetHeight;
             let scrollProgress = window.pageYOffset + window.innerHeight;
-            if (scrollProgress >= this.controlPoint.scrollProgress) {
+            if (scrollProgress >= this.controlPoint) {
                 this.loadMore();
-                /* var interval = setInterval(() => {
-                    if(scrollProgress - this.controlPoint.scrollProgress > 1000){
-                        this.controlPoint = {
-                            scrollProgress:offsetHeight - window.innerHeight,
-                            page : this.pageShouldLoaded
-                        };
-                        clearInterval(interval);    
-                    }
-                }, 1000); */
             }
         }
         
-    }
-    newRepositories(repos) {
-        this.state.repositories.forEach(function (currentValue, index) {
-            //var exists = repos.find(item => item.node_id == currentValue.node_id);
-            // exists ? this.setState({}) : false
-        });
     }
     loadMore() {
         var url = `https://api.github.com/search/repositories?q=created:%3E${date}&sort=stars&order=desc&page=${this.pageShouldLoaded}`;
@@ -85,17 +81,13 @@ class RepositoriesList extends React.Component {
         fetch(url)
             .then(response => response.json())
             .then(result => {
-                this.newRepositories(result["items"]);
                 this.setState({
                     repositories: this.state.repositories.concat(result["items"]),
                     isLoading: false, errorLoading: false
                 });
                 const newHeight = document.body.offsetHeight;
                 this.pageShouldLoaded += 1;
-                this.controlPoint = {
-                    scrollProgress: newHeight - window.innerHeight,
-                    page: this.pageShouldLoaded
-                };
+                this.controlPoint = newHeight - window.innerHeight;
             })
             .catch(e => {
                 console.log("error");
