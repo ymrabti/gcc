@@ -1,5 +1,5 @@
 {
-    "name": "gemography coding-challenge",
+    "name": "gcc",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
