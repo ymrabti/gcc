@@ -18,10 +18,11 @@ class RepositoriesItem extends React.Component {
         const repoName = this.item["name"];
         const userName = this.item["owner"]["login"];
         const avatarUrl = this.item["owner"]["avatar_url"];
+        const htmlUrl = this.item["html_url"];
+        const userHtmlUrl = this.item["owner"]["html_url"];
         const repoDesc = this.item["description"];
         const starCount = this.item["stargazers_count"];
         const issuesCount = this.item["open_issues_count"];
-        const github = "https://github.com/";
         const daysAgo = Math.ceil((timestamp - new Date(this.item["pushed_at"]).getTime()) / (1000 * 3600 * 24));
         return <div className="itemRepo" >
         <div className="left">
@@ -31,7 +32,7 @@ class RepositoriesItem extends React.Component {
         </div>
         <div className="right">
             <div className="reponame">
-                <a href={github+userName+"/"+repoName} rel="noreferrer" target="_blank">
+                <a href={htmlUrl} rel="noreferrer" target="_blank">
                     {repoName}
                 </a>
             </div>
@@ -40,7 +41,7 @@ class RepositoriesItem extends React.Component {
                 <span className="boxed">Stars : {starCount}</span>
                 <span className="boxed">Issues : {issuesCount}</span>
                     submitted {daysAgo}
-                    days ago by <a href={github+userName} rel="noreferrer" target="_blank">{userName}</a>
+                    days ago by <a href={userHtmlUrl} rel="noreferrer" target="_blank">{userName}</a>
             </div>
         </div>
     </div>;
